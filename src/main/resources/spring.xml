@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="userBean" class="cn.zqs.spring6.bean.User"/>
+
+    <bean id="nowTime" class="java.util.Date"/>
+
+    <bean id="userDaoBean" class="cn.zqs.spring6.dao.UserDao"/>
+    <bean id="userServiceBean" class="cn.zqs.spring6.service.UserService">
+        <property name="userDao" ref="userDaoBean"/>
+    </bean>
+
+    <bean id="userServiceBeanByCon" class="cn.zqs.spring6.service.UserService">
+        <constructor-arg name="userDao" ref="userDaoBean"/>
+    </bean>
+
+    <bean id="orderDaoBean" class="cn.zqs.spring6.dao.OrderDao"/>
+
+
+    <bean id="orderServiceBean" class="cn.zqs.spring6.service.OrderService">
+        <property name="orderDao" ref="orderDaoBean"/>
+    </bean>
+    <bean id="orderServiceBeanByInner" class="cn.zqs.spring6.service.OrderService">
+        <property name="orderDao">
+            <bean class="cn.zqs.spring6.dao.OrderDao"/>
+        </property>
+    </bean>
+
+    <bean id="myDataSourceBean" class="cn.zqs.spring6.dataSource.MyDataSource">
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="mysql://3306"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+
+
+
+</beans>
